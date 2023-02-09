@@ -25,9 +25,15 @@ frontend:
         The calculation of t-SNE has certain randomness (the initial state is randomly generated),
         setting this seed to the same number ensures a reproducible plot for the same data.
       default: 56143
-  exports:
-    - kind: sampleCoords
-      extractFrom: t-SNE coordinates
+    - type: text
+      injectInto: coord_name
+      label: Name of coordinates (default is t-SNE coordinates)
+      description: >-
+        In order to know the different t-SNE coordinates generated it is important to name them in each gbox.
+      default: "t-SNE coordinates"
+#  exports:
+#    - kind: sampleCoords
+#      extractFrom: t-SNE coordinates
   imports:
     - kind: assay
       label: Assay

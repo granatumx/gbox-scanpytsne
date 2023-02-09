@@ -34,7 +34,8 @@ def main():
     'dimNames': ['t-SNE dim. 1', 't-SNE dim. 2'],
     'coords': {sample_id: X_tsne[i, :].tolist() for i, sample_id in enumerate(adata.obs_names)},
   }
-  gn.export_statically(pca_export, 't-SNE coordinates')
+  #gn.export_statically(pca_export, 't-SNE coordinates')
+  gn.export(pca_export, "{}".format(gn.get_arg("coord_name")), kind='sampleCoords', meta=None)
 
   gn.commit()
 
