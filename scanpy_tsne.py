@@ -29,7 +29,7 @@ def main():
   X_tsne = TSNE(perplexity=perplexity, early_exaggeration=early_exaggeration, metric=metric, random_state=random_seed).fit_transform(df)
 
   plt.figure()
-  plt.scatter(X_tsne[:, 0], X_tsne[:, 1], 5000 / adata.shape[0])
+  plt.scatter(X_tsne[:, 0], X_tsne[:, 1], 5000 / df.shape[0])
   plt.xlabel('t-SNE dim. 1')
   plt.ylabel('t-SNE dim. 2')
   plt.tight_layout()
@@ -37,7 +37,7 @@ def main():
 
   pca_export = {
     'dimNames': ['t-SNE dim. 1', 't-SNE dim. 2'],
-    'coords': {sample_id: X_tsne[i, :].tolist() for i, sample_id in enumerate(adata.obs_names)},
+    'coords': {sample_id: X_tsne[i, :].tolist() for i, sample_id in enumerate(df.index)},
   }
   #gn.export_statically(pca_export, 't-SNE coordinates')
   gn.export(pca_export, "{}".format(gn.get_arg("coord_name")), kind='sampleCoords', meta=None)
