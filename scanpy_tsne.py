@@ -6,8 +6,8 @@ import random
 import scanpy.api as sc
 import matplotlib.pyplot as plt
 import numpy as np
-from MulticoreTSNE import MulticoreTSNE as TSNE
-#from sklearn.manifold import TSNE
+#from MulticoreTSNE import MulticoreTSNE as TSNE
+from sklearn.manifold import TSNE
 
 from granatum_sdk import Granatum
 
@@ -27,7 +27,7 @@ def main():
   #sc.tl.tsne(adata, random_state=random_seed)
 
   #X_tsne = adata.obsm['X_tsne']
-  X_tsne = TSNE(perplexity=perplexity, early_exaggeration=early_exaggeration, metric=metric, random_state=random_seed).fit_transform(df)
+  X_tsne = TSNE(perplexity=perplexity, early_exaggeration=early_exaggeration, metric=metric, random_state=random_seed, n_jobs=-1).fit_transform(df)
 
   plt.figure()
   plt.scatter(X_tsne[:, 0], X_tsne[:, 1], 5000 / df.shape[0])
