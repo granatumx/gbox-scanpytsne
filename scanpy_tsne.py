@@ -6,6 +6,7 @@ import random
 import scanpy.api as sc
 import matplotlib.pyplot as plt
 import numpy as np
+from sklearn.manifold import TSNE
 
 from granatum_sdk import Granatum
 
@@ -16,12 +17,16 @@ from granatum_sdk import Granatum
 def main():
   gn = Granatum()
 
-  adata = gn.ann_data_from_assay(gn.get_import('assay'))
+  df = gn.pandas_from_assay(gn.get_import('assay')).T
   random_seed = gn.get_arg('random_seed')
+  perplexity = gn.get_arg('perplexity')
+  early_exaggeration = gn.get_arg('early_exaggeration')
+  metric = gn.get_arg('metric')
 
-  sc.tl.tsne(adata, random_state=random_seed)
+  #sc.tl.tsne(adata, random_state=random_seed)
 
-  X_tsne = adata.obsm['X_tsne']
+  #X_tsne = adata.obsm['X_tsne']
+  X_tsne = TSNE(perplexity=perplexity, early_exaggeration=early_exaggeration, metric=metric, random_state=random_seed).fit_transform(df)
 
   plt.figure()
   plt.scatter(X_tsne[:, 0], X_tsne[:, 1], 5000 / adata.shape[0])

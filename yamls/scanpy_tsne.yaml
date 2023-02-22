@@ -25,6 +25,35 @@ frontend:
         The calculation of t-SNE has certain randomness (the initial state is randomly generated),
         setting this seed to the same number ensures a reproducible plot for the same data.
       default: 56143
+    - injectInto: metric
+      type: select
+      label: Metric (metric)
+      description: >-
+        This parameter controls how distance is computed in the ambient space of the input data.
+      choices:
+        - value: euclidean
+          label: Euclidean
+        - value: manhattan
+          label: Manhattan
+        - value: chebyshev
+          label: Chebyshev
+        - value: minkowski
+          label: Minkowski
+        - value: correlation
+          label: Correlation
+      default: correlation
+    - type: number
+      injectInto: perplexity
+      label: Perplexity
+      description: >-
+        The perplexity is related to the number of nearest neighbors that is used in other manifold learning algorithms. Larger datasets usually require a larger perplexity. Consider selecting a value between 5 and 50. Different values can result in significantly different results. The perplexity must be less than the number of samples.
+      number: 30.0
+    - type: number
+      injectInto: early_exaggeration
+      label: Early exaggeration
+      description: >-
+        Controls how tight natural clusters in the original space are in the embedded space and how much space will be between them. For larger values, the space between natural clusters will be larger in the embedded space. Again, the choice of this parameter is not very critical. If the cost function increases during initial optimization, the early exaggeration factor or the learning rate might be too high.
+      number: 30.0
     - type: text
       injectInto: coord_name
       label: Name of coordinates (default is t-SNE coordinates)
