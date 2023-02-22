@@ -6,7 +6,8 @@ import random
 import scanpy.api as sc
 import matplotlib.pyplot as plt
 import numpy as np
-from sklearn.manifold import TSNE
+from MulticoreTSNE import MulticoreTSNE as TSNE
+#from sklearn.manifold import TSNE
 
 from granatum_sdk import Granatum
 
